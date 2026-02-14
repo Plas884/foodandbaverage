@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Gacoan Food</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Gacoan Food</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="lokasi.html">Lokasi</a>
+        <a href="carapesan.html">Cara Pesan</a>
+    </nav>
+</header>
+
+<section class="menu-section">
+
+    <h2 class="section-title">Menu Mie</h2>
+    <table class="menu-table">
+        <tr>
+            <th>Nama Menu</th>
+            <th>Harga</th>
+            <th>Jumlah & Level</th>
+        </tr>
+        <tr>
+            <td>Mie Gacoan</td>
+            <td data-price="12000">Rp 12.000</td>
+            <td>
+                <input type="number" min="0" value="0" class="qty" data-name="Mie Gacoan">
+                <select class="level" data-name="Mie Gacoan">
+                    <option value="Level 1">Level 1</option>
+                    <option value="Level 2">Level 2</option>
+                    <option value="Level 3">Level 3</option>
+                    <option value="Level 4">Level 4</option>
+                    <option value="Level 5">Level 5</option>
+                    <option value="Level 6">Level 6</option>
+                    <option value="Level 7">Level 7</option>
+                    <option value="Level 8">Level 8</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Mie Asin</td>
+            <td data-price="12000">Rp 12.000</td>
+            <td>
+                <input type="number" min="0" value="0" class="qty" data-name="Mie Asin">
+                <select class="level" data-name="Mie Asin">
+                    <option value="Level 1">Level 1</option>
+                    <option value="Level 2">Level 2</option>
+                    <option value="Level 3">Level 3</option>
+                    <option value="Level 4">Level 4</option>
+                    <option value="Level 5">Level 5</option>
+                    <option value="Level 6">Level 6</option>
+                    <option value="Level 7">Level 7</option>
+                    <option value="Level 8">Level 8</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <h2 class="section-title">Tambahan</h2>
+    <table class="menu-table">
+        <tr>
+            <th>Nama Menu</th>
+            <th>Harga</th>
+            <th>Jumlah</th>
+        </tr>
+        <tr>
+            <td>Udang Keju</td>
+            <td data-price="10000">Rp 10.000</td>
+            <td><input type="number" min="0" value="0" class="qty" data-name="Udang Keju"></td>
+        </tr>
+        <tr>
+            <td>Pangsit</td>
+            <td data-price="9000">Rp 9.000</td>
+            <td><input type="number" min="0" value="0" class="qty" data-name="Pangsit"></td>
+        </tr>
+        <tr>
+            <td>Siomay</td>
+            <td data-price="9000">Rp 9.000</td>
+            <td><input type="number" min="0" value="0" class="qty" data-name="Siomay"></td>
+        </tr>
+    </table>
+
+    <h2 class="section-title">Minuman</h2>
+    <table class="menu-table">
+        <tr>
+            <th>Nama Menu</th>
+            <th>Harga</th>
+            <th>Jumlah</th>
+        </tr>
+        <tr>
+            <td>Es Teh</td>
+            <td data-price="5000">Rp 5.000</td>
+            <td><input type="number" min="0" value="0" class="qty" data-name="Es Teh"></td>
+        </tr>
+        <tr>
+            <td>Lemon Tea</td>
+            <td data-price="6000">Rp 6.000</td>
+            <td><input type="number" min="0" value="0" class="qty" data-name="Lemon Tea"></td>
+        </tr>
+    </table>
+
+    <button id="lihatNota" class="btn">Lihat Nota</button>
+
+    <div id="nota" style="display:none; margin-top:20px; padding:15px; border:1px solid #ccc; border-radius:10px; background:#f9f9f9;">
+      <h3>Nota Pesanan</h3>
+      <pre id="notaContent"></pre>
+      <button id="kirimWA" class="btn">Kirim via WhatsApp</button>
+    </div>
+
+    <div id="notif" style="display:none; color:green; font-weight:bold; margin-top:10px;">
+      Pesanan berhasil, makanan sedang diproses!
+    </div>
+
+</section>
+
+<footer>
+    <p>📞 082124759116</p>
+    <p>📧 gacoanfood@email.com</p>
+</footer>
+
+<script>
+document.getElementById('lihatNota').addEventListener('click', function() {
+  let items = document.querySelectorAll('.menu-table tr');
+  let notaMakanan = '';
+  let notaTambahan = '';
+  let notaMinuman = '';
+  let total = 0;
+
+  items.forEach((item, index) => {
+    if(index === 0) return; // skip header
+    let qtyInput = item.querySelector('.qty');
+    if(!qtyInput) return;
+    let qty = parseInt(qtyInput.value);
+    if(qty > 0){
+      let name = qtyInput.dataset.name;
+      let levelSelect = item.querySelector('.level');
+      let price = parseInt(item.querySelector('[data-price]').dataset.price);
+      let subtotal = price * qty;
+      total += subtotal;
+
+      let line = '';
+      if(levelSelect){
+        line = `- ${name} ${levelSelect.value} x${qty} = Rp ${subtotal.toLocaleString()}\n`;
+      } else {
+        line = `- ${name} x${qty} = Rp ${subtotal.toLocaleString()}\n`;
+      }
+
+      if(item.closest('table').previousElementSibling.innerText.includes('Mie')){
+        notaMakanan += line;
+      } else if(item.closest('table').previousElementSibling.innerText.includes('Tambahan')){
+        notaTambahan += line;
+      } else if(item.closest('table').previousElementSibling.innerText.includes('Minuman')){
+        notaMinuman += line;
+      }
+    }
+  });
+
+  let nota = '';
+  if(notaMakanan) nota += 'Makanan:\n' + notaMakanan;
+  if(notaTambahan) nota += 'Tambahan:\n' + notaTambahan;
+  if(notaMinuman) nota += 'Minuman:\n' + notaMinuman;
+  nota += `\nTotal: Rp ${total.toLocaleString()}`;
+
+  if(total === 0){
+    alert("Belum ada pesanan!");
+    return;
+  }
+
+  document.getElementById('notaContent').innerText = nota;
+  document.getElementById('nota').style.display = 'block';
+});
+
+document.getElementById('kirimWA').addEventListener('click', function() {
+  let pesan = document.getElementById('notaContent').innerText;
+  let waNumber = '6282124759116'; // ganti dengan nomor admin
+  let waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(pesan)}`;
+  window.open(waLink, '_blank');
+
+  let notif = document.getElementById('notif');
+  notif.style.display = 'block';
+  setTimeout(() => { notif.style.display = 'none'; }, 5000);
+});
+</script>
+
+</body>
+</html>
