@@ -1,0 +1,193 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f6f9fc, #e9f1f7);
+    color: #2c3e50;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, #1f2937, #374151);
+    padding: 20px 10%;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    position: relative;
+}
+
+header nav a::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    background: #4ca1af;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+header nav a:hover::after {
+    width: 100%;
+}
+
+/* MENU SECTION */
+.menu-section {
+    padding: 70px 10%;
+}
+
+/* JUDUL */
+.section-title {
+    font-size: 26px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: "";
+    width: 60%;
+    height: 4px;
+    background: linear-gradient(90deg, #4ca1af, #2c3e50);
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    border-radius: 10px;
+}
+
+/* TABEL */
+.menu-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+    transition: 0.3s;
+}
+
+.menu-table:hover {
+    transform: translateY(-5px);
+}
+
+.menu-table th {
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+    color: white;
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.menu-table td {
+    padding: 15px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.menu-table tr:last-child td {
+    border-bottom: none;
+}
+
+.menu-table tr:hover {
+    background-color: #f3f8fb;
+    transition: 0.3s;
+}
+
+/* BUTTON */
+.btn {
+    background: linear-gradient(135deg, #4ca1af, #2c3e50);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #1f2937;
+    color: white;
+    margin-top: 50px;
+}
+/* CONTAINER BIAR TENGAH */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* SECTION UMUM */
+.page-section {
+    padding: 60px 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+/* JUDUL HALAMAN */
+.page-section h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* PARAGRAF */
+.page-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 20px auto;
+}
+.info-box {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.order-steps {
+    text-align: left;
+    margin-bottom: 25px;
+    line-height: 1.8;
+}
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-table {
+        font-size: 14px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+}
